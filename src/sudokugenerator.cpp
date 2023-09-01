@@ -81,8 +81,18 @@ void Sudoku::checkGeneratedRow(int row)
     for(int column = 0; column < 9; column++) {
         if(board_[row][column] == 0) {
             resetRow(row);
-            row_--;
+            lineFailure_++;
+            if(lineFailure_ == 10) {
+                resetBoard();
+                row_ = -1;
+                lineFailure_ = 0;
+            } else {
+                row_--;
+            }
             break;
+        }
+        if(column == 9) {
+            lineFailure_ = 0;
         }
     }
 }
