@@ -17,7 +17,7 @@ QVector<QVector<int> > Sudoku::generateBoard()
     for(row_ = 0; row_ < 9; row_++) {
         QVector<int> numbers = shuffleNumbers({1,2,3,4,5,6,7,8,9});
         for(column_ = 0; column_ < 9; column_++) {
-            for(int element = 0; element < 9; element++) {
+            for(int element = 0; element < numbers.size(); element++) {
                 if(!checkRow(row_, numbers[element]) && !checkColumn(column_, numbers[element]) && !checkSquare(row_, column_, numbers[element])) {
                     board_[row_][column_] = numbers[element];
                     numbers.remove(element, 1);
@@ -27,7 +27,6 @@ QVector<QVector<int> > Sudoku::generateBoard()
         }
         checkGeneratedRow(row_);
     }
-
     return board_;
 }
 
@@ -82,17 +81,8 @@ void Sudoku::checkGeneratedRow(int row)
     for(int column = 0; column < 9; column++) {
         if(board_[row][column] == 0) {
             resetRow(row);
-            lineFailure_++;
-            if(lineFailure_ == 10) {
-                resetBoard();
-                row_ = -1;
-                lineFailure_ = 0;
-            } else {
-                row_--;
-            }
-        }
-        if(column == 9) {
-            lineFailure_ = 0;
+            row_--;
+            break;
         }
     }
 }

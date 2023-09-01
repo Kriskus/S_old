@@ -13,8 +13,8 @@ int main(int argc, char *argv[])
     //    w.show();
     //    return a.exec();
 
-    Sudoku s;
-    QVector<QVector<int>> board = s.generateBoard();
+    Sudoku* s = new Sudoku;
+    QVector<QVector<int>> board = s->generateBoard();
 
     for(int i = 0; i < 9; i++) {
         for(int j = 0; j < 9; j++) {
@@ -22,4 +22,6 @@ int main(int argc, char *argv[])
         }
         std::cout << "\n";
     }
+    delete s;
+    return 0;
 }
