@@ -5,11 +5,18 @@
 
 class Cell : public QPlainTextEdit
 {
+    Q_OBJECT
 public:
-    Cell(int number = 0);
+    Cell(int correctDigit = 0);
 
 private:
-    int number_{0};
+    int correctDigit_{0};
+
+public slots:
+    void writeDigit(int digit);
+
+private slots:
+    bool checkDigit(int digit);
 
 signals:
     void clicked(Cell* cell);
