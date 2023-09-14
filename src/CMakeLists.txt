@@ -16,14 +16,14 @@ set(PROJECT_SOURCES
         main.cpp
         mainwindow.h mainwindow.cpp mainwindow.ui
         sudokugenerator.h sudokugenerator.cpp
+        cell.h cell.cpp
+        boardgame.h boardgame.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(Sudoku
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        sudokugenerator.h sudokugenerator.cpp
-        cell.h cell.cpp
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET Sudoku APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
