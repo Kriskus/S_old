@@ -1,10 +1,12 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QGridLayout>
 #include <QMainWindow>
 
 #include "cell.h"
 #include "sudokugenerator.h"
+#include "boardgame.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -22,11 +24,17 @@ private:
     Ui::MainWindow *ui;
     Sudoku* sudoku_;
     Cell* cell_;
-    QVector<QVector<int>> board_{};
+    BoardGame* currentBoardLayout_{};
+    QVector<QVector<int>> sudokuBoard_{};
+    QVector<BoardGame*> boardLayoutList_{};
 
 private slots:
     void newGame();
     void generateGameBoard();
+
+    void createLayout();
+
+    void setBoardLayout(int row, int column);
 
     void setCellToEdit(Cell *cellToEdit);
 };
