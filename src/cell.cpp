@@ -5,6 +5,10 @@ Cell::Cell(int correctDigit)
     : correctDigit_(correctDigit)
 {
     setReadOnly(true);
+    setMaximumHeight(30);
+    setMaximumWidth(30);
+
+    setPlainText(QString::number(correctDigit));
 }
 
 void Cell::writeDigit(int digit)
@@ -15,6 +19,7 @@ void Cell::writeDigit(int digit)
     } else {
         format.setForeground(Qt::red);
     }
+    selectAll();
     textCursor().setCharFormat(format);
     setPlainText(QString::number(digit));
 }
