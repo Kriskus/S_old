@@ -11,17 +11,21 @@ Cell::Cell(int correctDigit)
     setPlainText(QString::number(correctDigit));
 }
 
-void Cell::writeDigit(int digit)
+void Cell::writeDigit(const QString& digit)
 {
     QTextCharFormat format;
-    if(checkDigit(digit)) {
-        format.setForeground(Qt::black);
+    if(digit == "0") {
+        format.setForeground(Qt::white);
     } else {
-        format.setForeground(Qt::red);
+        if(checkDigit(digit.toInt())) {
+            format.setForeground(Qt::black);
+        } else {
+            format.setForeground(Qt::red);
+        }
     }
     selectAll();
     textCursor().setCharFormat(format);
-    setPlainText(QString::number(digit));
+    setPlainText(digit);
 }
 
 bool Cell::checkDigit(int digit)

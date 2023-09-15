@@ -13,7 +13,7 @@ private:
     int correctDigit_{0};
 
 public slots:
-    void writeDigit(int digit);
+    void writeDigit(const QString &digit);
 
 private slots:
     bool checkDigit(int digit);
