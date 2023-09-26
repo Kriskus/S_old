@@ -91,13 +91,9 @@ void MainWindow::setBoardLayout(int row, int column)
 void MainWindow::setCellToEdit(Cell* cellToEdit)
 {
     if(cell_!=nullptr) {
-        cell_->setStyleSheet("QLabel{"
-                             "background-color: none;"
-                             "border: 1px solid black}");
+        cell_->setStyle(false);
     }
     cell_ = cellToEdit;
-    cell_->setStyleSheet("QLabel{"
-                         "background-color: gray;"
-                         "border: 1px solid black}");
+    cell_->setStyle(true);
 }
 
