@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     sudoku_ = new Sudoku;
+    cell_={};
 
     newGame();
 
@@ -89,6 +90,14 @@ void MainWindow::setBoardLayout(int row, int column)
 
 void MainWindow::setCellToEdit(Cell* cellToEdit)
 {
+    if(cell_!=nullptr) {
+        cell_->setStyleSheet("QLabel{"
+                             "background-color: none;"
+                             "border: 1px solid black}");
+    }
     cell_ = cellToEdit;
+    cell_->setStyleSheet("QLabel{"
+                         "background-color: gray;"
+                         "border: 1px solid black}");
 }
 
