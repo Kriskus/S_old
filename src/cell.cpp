@@ -4,28 +4,27 @@
 Cell::Cell(int correctDigit)
     : correctDigit_(correctDigit)
 {
-    setReadOnly(true);
     setMaximumHeight(30);
     setMaximumWidth(30);
-
-    setPlainText(QString::number(correctDigit));
+    setAlignment(Qt::AlignCenter);
+    setAlignment(Qt::AlignHCenter);
+    setStyleSheet("QLabel{border: 1px solid black}");
+    setText(QString::number(correctDigit));
 }
 
 void Cell::writeDigit(const QString& digit)
 {
-    QTextCharFormat format;
-    if(digit == "0") {
-        format.setForeground(Qt::white);
+    setText(digit);
+    if(checkDigit(digit.toInt())) {
+        setStyleSheet("QLabel{color: black;}");
     } else {
-        if(checkDigit(digit.toInt())) {
-            format.setForeground(Qt::black);
-        } else {
-            format.setForeground(Qt::red);
-        }
+        setStyleSheet("QLabel{color: red;}");
     }
-    selectAll();
-    textCursor().setCharFormat(format);
-    setPlainText(digit);
+}
+
+void Cell::setStyleSheet(bool active)
+{
+
 }
 
 bool Cell::checkDigit(int digit)

@@ -1,9 +1,9 @@
 #ifndef CELL_H
 #define CELL_H
 
-#include <QPlainTextEdit>
+#include <QLabel>
 
-class Cell : public QPlainTextEdit
+class Cell : public QLabel
 {
     Q_OBJECT
 public:
@@ -11,9 +11,11 @@ public:
 
 private:
     int correctDigit_{0};
+    QString style_{};
 
 public slots:
     void writeDigit(const QString &digit);
+    void setStyleSheet(bool active);
 
 private slots:
     bool checkDigit(int digit);
