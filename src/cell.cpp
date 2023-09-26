@@ -15,21 +15,32 @@ Cell::Cell(int correctDigit)
 void Cell::writeDigit(const QString& digit)
 {
     setText(digit);
-    if(checkDigit(digit.toInt())) {
-        setStyleSheet("QLabel{color: black;}");
+    setStyle(true);
+}
+
+void Cell::setStyle(bool active)
+{
+    QString bColor{};
+    if(active) {
+        bColor = "silver";
     } else {
-        setStyleSheet("QLabel{color: red;}");
+        bColor = "none";
     }
+    QString fColor = checkDigit();
+    style_ = "QLabel{"
+            "border: 1px solid black;"
+            "color: " + fColor + ";"
+            "background-color: " + bColor + ";}";
+    setStyleSheet(style_);
 }
 
-void Cell::setStyleSheet(bool active)
+QString Cell::checkDigit()
 {
-
-}
-
-bool Cell::checkDigit(int digit)
-{
-    return digit == correctDigit_;
+    if(text() != "" && text().toInt() != correctDigit_) {
+        return "red";
+    }else {
+        return "black";
+    }
 }
 
 void Cell::mousePressEvent(QMouseEvent *event)

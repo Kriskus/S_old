@@ -15,10 +15,10 @@ private:
 
 public slots:
     void writeDigit(const QString &digit);
-    void setStyleSheet(bool active);
+    void setStyle(bool active);
 
 private slots:
-    bool checkDigit(int digit);
+    QString checkDigit();
 
 signals:
     void clicked(Cell* cell);
