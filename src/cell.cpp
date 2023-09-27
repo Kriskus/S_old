@@ -1,7 +1,7 @@
 #include "cell.h"
 
 
-Cell::Cell(int correctDigit)
+Cell::Cell(int correctDigit, bool visible)
     : correctDigit_(correctDigit)
 {
     setMaximumHeight(30);
@@ -9,7 +9,10 @@ Cell::Cell(int correctDigit)
     setAlignment(Qt::AlignCenter);
     setAlignment(Qt::AlignHCenter);
     setStyleSheet("QLabel{border: 1px solid black}");
-    setText(QString::number(correctDigit));
+    if(visible) {
+        setText(QString::number(correctDigit));
+        readOnly_ = true;
+    }
 }
 
 void Cell::writeDigit(const QString& digit)
@@ -28,9 +31,9 @@ void Cell::setStyle(bool active)
     }
     QString fColor = checkDigit();
     style_ = "QLabel{"
-            "border: 1px solid black;"
-            "color: " + fColor + ";"
-            "background-color: " + bColor + ";}";
+             "border: 1px solid black;"
+             "color: " + fColor + ";"
+             "background-color: " + bColor + ";}";
     setStyleSheet(style_);
 }
 
@@ -46,5 +49,7 @@ QString Cell::checkDigit()
 void Cell::mousePressEvent(QMouseEvent *event)
 {
     Q_UNUSED(event);
-    emit clicked(this);
+    if(!readOnly_) {
+        emit clicked(this);
+    }
 }
