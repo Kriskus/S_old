@@ -2,6 +2,10 @@
 #include "./ui_mainwindow.h"
 
 #include <QPushButton>
+#include <QDebug>
+#include <tuple>
+
+#include "cellvisibilitygenerator.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -24,6 +28,8 @@ MainWindow::~MainWindow()
 void MainWindow::newGame()
 {
     sudokuBoard_ = sudoku_->generateBoard();
+    CellVisibilityGenerator cellV;
+    cellVisible_ = cellV.drawCellVisibility(25);
     createLayout();
 }
 
@@ -33,10 +39,18 @@ void MainWindow::generateGameBoard()
         for (int column = 0; column < 9; ++column) {
             setBoardLayout(row, column);
 
-            Cell* cell = new Cell(sudokuBoard_[row][column]);
+            for (const auto& visible: cellVisible_) {
+                if(row == visible.first && column == visible.second) {
+                    visibility_ = true;
+                    break;
+                }
+            }
+
+            Cell* cell = new Cell(sudokuBoard_[row][column], visibility_);
             connect(cell, &Cell::clicked, this, &MainWindow::setCellToEdit);
 
             currentBoardLayout_->addCell(cell);
+            visibility_ = false;
         }
     }
     int buttonRow = 0;
@@ -48,7 +62,7 @@ void MainWindow::generateGameBoard()
             button->setObjectName(QString::number(element+1));
         } else {
             button = new QPushButton("C");
-            button->setObjectName("0");
+            button->setObjectName("");
         }
         button->setMinimumSize(60,60);
         button->setMaximumSize(60,60);

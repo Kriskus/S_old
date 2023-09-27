@@ -27,6 +27,9 @@ private:
     BoardGame* currentBoardLayout_{};
     QVector<QVector<int>> sudokuBoard_{};
     QVector<BoardGame*> boardLayoutList_{};
+    QVector<std::pair<int, int>> cellVisible_{};
+
+    bool visibility_{false};
 
 private slots:
     void newGame();
