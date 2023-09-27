@@ -17,6 +17,7 @@ set(PROJECT_SOURCES
         mainwindow.h mainwindow.cpp mainwindow.ui
         sudokugenerator.h sudokugenerator.cpp
         cell.h cell.cpp
+        cellvisibilitygenerator.h cellvisibilitygenerator.cpp
         boardgame.h boardgame.cpp
 )
 
