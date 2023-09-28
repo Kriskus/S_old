@@ -4,7 +4,7 @@
 
 Sudoku::Sudoku()
 {
-    board_ = QVector<QVector<int>>(9, QVector<int>(9, 0));
+//    board_ = QVector<QVector<int>>(9, QVector<int>(9, 0));
 }
 
 Sudoku::~Sudoku()

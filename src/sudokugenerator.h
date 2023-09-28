@@ -10,7 +10,7 @@ public:
     Sudoku();
     ~Sudoku();
 
-    QVector<QVector<int>> board_{};
+    QVector<QVector<int>> board_{QVector<QVector<int>>(9, QVector<int>(9, 0))};
 
     QVector<QVector<int>> generateBoard();
 
