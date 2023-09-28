@@ -2,7 +2,9 @@
 #define CELLVISIBILITYGENERATOR_H
 
 #include <QVector>
-#include <tuple>
+#include <set>
+#include <random>
+#include <chrono>
 
 class CellVisibilityGenerator
 {
@@ -11,10 +13,11 @@ public:
 
     QVector<std::pair<int, int>> drawCellVisibility(int numberOfCell);
 
-    std::pair<int, int> generateNumbers();
 
 private:
     QVector<std::pair<int, int>> cellSettings_{};
+    std::mt19937 generator_;
+    std::pair<int, int> generateNumbers();
 };
 
 #endif // CELLVISIBILITYGENERATOR_H

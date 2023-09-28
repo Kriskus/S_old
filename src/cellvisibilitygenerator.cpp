@@ -5,6 +5,7 @@
 #include <algorithm>
 
 CellVisibilityGenerator::CellVisibilityGenerator()
+    : generator_(std::chrono::high_resolution_clock::now().time_since_epoch().count())
 {
 
 }
@@ -31,9 +32,6 @@ QVector<std::pair<int, int>> CellVisibilityGenerator::drawCellVisibility(int num
 
 std::pair<int, int> CellVisibilityGenerator::generateNumbers()
 {
-    auto seed = std::chrono::high_resolution_clock::now().time_since_epoch().count();
-    std::mt19937 generator(seed);
     std::uniform_int_distribution<int> distribution(0, 8);
-    //    int liczba = distribution(generator);
-    return {distribution(generator), distribution(generator)};
+    return {distribution(generator_), distribution(generator_)};
 }
