@@ -4,10 +4,11 @@
 Cell::Cell(int correctDigit, bool visible, int sideSize)
     : correctDigit_(correctDigit)
 {
-    setMaximumHeight(sideSize);
-    setMaximumWidth(sideSize);
-    setAlignment(Qt::AlignCenter);
-    setAlignment(Qt::AlignHCenter);
+    setFixedSize(sideSize, sideSize);
+    setAlignment(Qt::AlignCenter | Qt::AlignHCenter);
+    QFont font;
+    font.setPointSize(20);
+    setFont(font);
     setStyleSheet("QLabel{border: 1px solid grey;"
                           "color: white;}");
     if(visible) {
@@ -15,6 +16,9 @@ Cell::Cell(int correctDigit, bool visible, int sideSize)
         readOnly_ = true;
     }
 }
+
+Cell::~Cell()
+{}
 
 void Cell::writeDigit(const QString& digit)
 {
@@ -24,12 +28,7 @@ void Cell::writeDigit(const QString& digit)
 
 void Cell::setStyle(bool active)
 {
-    QString bColor{};
-    if(active) {
-        bColor = "silver";
-    } else {
-        bColor = "none";
-    }
+    QString bColor = active ? "silver" : "none";
     QString fColor = checkDigit(active);
     style_ = "QLabel{"
              "border: 1px solid grey;"
@@ -41,6 +40,7 @@ void Cell::setStyle(bool active)
 QString Cell::checkDigit(bool active)
 {
     if(text() != "" && text().toInt() != correctDigit_) {
+        emit mistake();
         return "red";
     } else if(active) {
         return "black";
