@@ -14,12 +14,15 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    connect(ui->pushButtonExit, &QPushButton::clicked, this, &MainWindow::close);
+    connect(ui->pushButtonNew, &QPushButton::clicked, this, &MainWindow::newGame);
+
     sudoku_ = new Sudoku;
     cell_={};
 
     setCellSize();
+    addButtons();
     newGame();
-    generateGameBoard();
 }
 
 MainWindow::~MainWindow()
@@ -29,32 +32,18 @@ MainWindow::~MainWindow()
 
 void MainWindow::newGame()
 {
+    clearBoard();
+    mistakes_ = 0;
     sudokuBoard_ = sudoku_->generateBoard();
-    CellVisibilityGenerator cellV;
-    cellVisible_ = cellV.drawCellVisibility(25);
+    CellVisibilityGenerator* cellV = new CellVisibilityGenerator();
+    cellVisible_ = cellV->drawCellVisibility(25);
     createLayout();
+    generateGameBoard();
+    delete cellV;
 }
 
-void MainWindow::generateGameBoard()
+void MainWindow::addButtons()
 {
-    for (int row = 0; row < 9; ++row) {
-        for (int column = 0; column < 9; ++column) {
-            setBoardLayout(row, column);
-
-            for (const auto& visible: cellVisible_) {
-                if(row == visible.first && column == visible.second) {
-                    visibility_ = true;
-                    break;
-                }
-            }
-
-            Cell* cell = new Cell(sudokuBoard_[row][column], visibility_);
-            connect(cell, &Cell::clicked, this, &MainWindow::setCellToEdit);
-
-            currentBoardLayout_->addCell(cell);
-            visibility_ = false;
-        }
-    }
     int buttonRow = 0;
     int buttonColumn = 0;
     for (int element = 0; element < 10; ++element) {
@@ -76,9 +65,44 @@ void MainWindow::generateGameBoard()
         }
         ui->buttonLayout->addWidget(button, buttonRow, buttonColumn++);
         connect(button, &QPushButton::clicked, [this, button]() {
-                cell_->writeDigit(button->objectName());
-            });
+            cell_->writeDigit(button->objectName());
+        });
     }
+}
+
+void MainWindow::generateGameBoard()
+{
+    for (int row = 0; row < 9; ++row) {
+        for (int column = 0; column < 9; ++column) {
+            setBoardLayout(row, column);
+
+            for (const auto& visible: cellVisible_) {
+                if(row == visible.first && column == visible.second) {
+                    visibility_ = true;
+                    break;
+                }
+            }
+
+            Cell* cell = new Cell(sudokuBoard_[row][column], visibility_, cellSideSize_);
+            connect(cell, &Cell::clicked, this, &MainWindow::setCellToEdit);
+            connect(cell, &Cell::mistake, [this]() {
+                ui->labelMistakeCnt->setText(QString::number(++mistakes_));
+            });
+
+            currentBoardLayout_->addCell(cell);
+            visibility_ = false;
+        }
+    }
+}
+
+void MainWindow::clearBoard()
+{
+    // Usunięcie obiektów typu BoardGame
+    for (BoardGame* boardLayout : boardLayoutList_) {
+        boardLayout->clearContents();
+        delete boardLayout;
+    }
+    boardLayoutList_.clear(); // Wyczyść listę układów plansz
 }
 
 void MainWindow::createLayout()

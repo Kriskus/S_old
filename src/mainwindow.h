@@ -31,10 +31,13 @@ private:
 
     bool visibility_{false};
     int cellSideSize_{0};
+    int mistakes_{0};
 
 private slots:
     void newGame();
+    void addButtons();
     void generateGameBoard();
+    void clearBoard();
 
     void createLayout();
     void setCellSize();
