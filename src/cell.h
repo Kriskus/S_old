@@ -7,7 +7,7 @@ class Cell : public QLabel
 {
     Q_OBJECT
 public:
-    Cell(int correctDigit = 0, bool visible = false);
+    Cell(int correctDigit = 0, bool visible = false, int sideSize = 0);
 
 private:
     int correctDigit_{0};
@@ -19,7 +19,7 @@ public slots:
     void setStyle(bool active);
 
 private slots:
-    QString checkDigit();
+    QString checkDigit(bool active);
 
 signals:
     void clicked(Cell* cell);

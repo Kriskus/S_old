@@ -1,14 +1,15 @@
 #include "cell.h"
 
 
-Cell::Cell(int correctDigit, bool visible)
+Cell::Cell(int correctDigit, bool visible, int sideSize)
     : correctDigit_(correctDigit)
 {
-    setMaximumHeight(30);
-    setMaximumWidth(30);
+    setMaximumHeight(sideSize);
+    setMaximumWidth(sideSize);
     setAlignment(Qt::AlignCenter);
     setAlignment(Qt::AlignHCenter);
-    setStyleSheet("QLabel{border: 1px solid black}");
+    setStyleSheet("QLabel{border: 1px solid grey;"
+                          "color: white;}");
     if(visible) {
         setText(QString::number(correctDigit));
         readOnly_ = true;
@@ -29,20 +30,22 @@ void Cell::setStyle(bool active)
     } else {
         bColor = "none";
     }
-    QString fColor = checkDigit();
+    QString fColor = checkDigit(active);
     style_ = "QLabel{"
-             "border: 1px solid black;"
+             "border: 1px solid grey;"
              "color: " + fColor + ";"
              "background-color: " + bColor + ";}";
     setStyleSheet(style_);
 }
 
-QString Cell::checkDigit()
+QString Cell::checkDigit(bool active)
 {
     if(text() != "" && text().toInt() != correctDigit_) {
         return "red";
-    }else {
+    } else if(active) {
         return "black";
+    } else {
+        return "white";
     }
 }
 
