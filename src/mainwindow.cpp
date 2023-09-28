@@ -4,6 +4,7 @@
 #include <QPushButton>
 #include <QDebug>
 #include <tuple>
+#include <QScreen>
 
 #include "cellvisibilitygenerator.h"
 
@@ -12,11 +13,12 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
     sudoku_ = new Sudoku;
     cell_={};
 
+    setCellSize();
     newGame();
-
     generateGameBoard();
 }
 
@@ -64,6 +66,8 @@ void MainWindow::generateGameBoard()
             button = new QPushButton("C");
             button->setObjectName("");
         }
+        button->setStyleSheet("background-color: grey;"
+                              "color: black;");
         button->setMinimumSize(60,60);
         button->setMaximumSize(60,60);
         if(buttonColumn == 5) {
@@ -87,6 +91,12 @@ void MainWindow::createLayout()
             boardLayoutList_.push_back(boardLayout);
         }
     }
+}
+
+void MainWindow::setCellSize()
+{
+    QRect screenGeometry = QGuiApplication::primaryScreen()->availableGeometry();
+    cellSideSize_ = screenGeometry.width() * 0.9 / 9;
 }
 
 void MainWindow::setBoardLayout(int row, int column)

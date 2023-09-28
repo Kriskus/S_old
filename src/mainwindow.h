@@ -30,12 +30,14 @@ private:
     QVector<std::pair<int, int>> cellVisible_{};
 
     bool visibility_{false};
+    int cellSideSize_{0};
 
 private slots:
     void newGame();
     void generateGameBoard();
 
     void createLayout();
+    void setCellSize();
 
     void setBoardLayout(int row, int column);
 
