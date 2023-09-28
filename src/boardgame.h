@@ -11,6 +11,7 @@ class BoardGame : public QWidget
     Q_OBJECT
 public:
     BoardGame(int row = 0, int column = 0);
+    ~BoardGame();
 
 private:
     int row_{0};
@@ -19,6 +20,7 @@ private:
 
 public slots:
     void addCell(Cell* cell);
+    void clearContents();
 
 };
 
