@@ -34,15 +34,20 @@ private:
     int mistakes_{0};
 
 private slots:
-    void newGame();
-    void addButtons();
-    void generateGameBoard();
-    void clearBoard();
-
     void createLayout();
+    void setCurrentBoardLayout(int row, int column);
+
+    void setButtons();
     void setCellSize();
 
-    void setBoardLayout(int row, int column);
+    void generateGameBoard();
+    void checkVisibility(int row, int column);
+    void addCellToGameLayout(int row, int column);
+
+    void newGame();
+
+    void clearBoard();
+
 
     void setCellToEdit(Cell *cellToEdit);
 };
