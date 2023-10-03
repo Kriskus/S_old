@@ -31,7 +31,7 @@ void Cell::setStyle(bool active)
     QString bColor = active ? "silver" : "none";
     QString fColor = checkDigit(active);
     style_ = "QLabel{"
-             "border: 1px solid grey;"
+             "border: 2px solid grey;"
              "color: " + fColor + ";"
              "background-color: " + bColor + ";}";
     setStyleSheet(style_);
