@@ -10,6 +10,8 @@ BoardGame::BoardGame(int row, int column)
     setObjectName(QString::number(row*3) + QString::number(column*3));
     layout_ = new QGridLayout(this);
     setLayout(layout_);
+    layout()->setContentsMargins(1,1,1,1);
+    layout()->setSpacing(1);
 }
 
 BoardGame::~BoardGame()
