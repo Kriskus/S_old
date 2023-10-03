@@ -3,6 +3,7 @@
 
 #include <QGridLayout>
 #include <QMainWindow>
+#include <QTimer>
 
 #include "cell.h"
 #include "sudokugenerator.h"
@@ -22,8 +23,9 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    Sudoku* sudoku_;
-    Cell* cell_;
+    QTimer* timer_{};
+    Sudoku* sudoku_{};
+    Cell* cell_{};
     BoardGame* currentBoardLayout_{};
     QVector<QVector<int>> sudokuBoard_{};
     QVector<BoardGame*> boardLayoutList_{};
@@ -32,6 +34,7 @@ private:
     bool visibility_{false};
     int cellSideSize_{0};
     int mistakes_{0};
+    int totalTimeInSeconds_{0};
 
 private slots:
     void createLayout();
@@ -44,11 +47,13 @@ private slots:
     void checkVisibility(int row, int column);
     void addCellToGameLayout(int row, int column);
 
-    void newGame();
+    void chooseLvl();
+    void newGame(int dificultyLvl);
 
     void clearBoard();
 
 
     void setCellToEdit(Cell *cellToEdit);
+    void startTimer();
 };
 #endif // MAINWINDOW_H

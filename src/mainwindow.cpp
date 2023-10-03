@@ -7,6 +7,7 @@
 #include <QScreen>
 
 #include "cellvisibilitygenerator.h"
+#include "difficultysettings.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -17,11 +18,17 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     connect(ui->pushButtonExit, &QPushButton::clicked, this, &MainWindow::close);
-    connect(ui->pushButtonNew, &QPushButton::clicked, this, &MainWindow::newGame);
+    connect(ui->pushButtonNew, &QPushButton::clicked, this, &MainWindow::chooseLvl);
 
+    setMinimumWidth(515);
+    setMaximumWidth(515);
+    setMinimumHeight(669);
+    setMinimumHeight(669);
+
+    //ui->labelTimeCnt->setText(QString::number(this->width()) + "|" + QString::number(this->height()));
     setCellSize();
     setButtons();
-    newGame();
+    //chooseLvl();
 }
 
 MainWindow::~MainWindow()
@@ -36,6 +43,7 @@ void MainWindow::createLayout()
             BoardGame* boardLayout = new BoardGame(row, column);
             ui->gameLayout->addWidget(boardLayout, row, column);
             boardLayoutList_.push_back(boardLayout);
+
         }
     }
 }
@@ -56,11 +64,13 @@ void MainWindow::setCurrentBoardLayout(int row, int column)
 void MainWindow::setButtons()
 {
     for (int row = 0; row < 3; ++row) {
-        for (int column = 0; column < 3; ++column) {
+        for (int column = 1; column < 4; ++column) {
             QPushButton *button = qobject_cast<QPushButton*>(ui->buttonLayout->itemAtPosition(row, column)->widget());
             if (button) {
                 connect(button, &QPushButton::clicked, [this, button]() {
-                    cell_->writeDigit(button->objectName().split("_").last());
+                    if(cell_ != nullptr) {
+                        cell_->writeDigit(button->objectName().split("_").last());
+                    }
                 });
             }
         }
@@ -72,8 +82,9 @@ void MainWindow::setButtons()
 
 void MainWindow::setCellSize()
 {
-    QRect screenGeometry = QGuiApplication::primaryScreen()->availableGeometry();
-    cellSideSize_ = screenGeometry.width() * 0.9 / 9;
+    //QRect screenGeometry = QGuiApplication::primaryScreen()->availableGeometry();
+    //cellSideSize_ = screenGeometry.width() * 0.9 / 9;
+    cellSideSize_ = 41;
 }
 
 void MainWindow::generateGameBoard()
@@ -111,16 +122,28 @@ void MainWindow::addCellToGameLayout(int row, int column)
     currentBoardLayout_->addCell(cell);
 }
 
-void MainWindow::newGame()
+void MainWindow::chooseLvl()
+{
+    DifficultySettings* selectLvl = new DifficultySettings();
+    connect(selectLvl, &DifficultySettings::closeWindow, selectLvl, &DifficultySettings::close);
+    connect(selectLvl, &DifficultySettings::closeWindow, this, &MainWindow::close);
+    connect(selectLvl, &DifficultySettings::setDificulty, this, &MainWindow::newGame);
+    connect(selectLvl, &DifficultySettings::setDificulty, selectLvl, &DifficultySettings::close);
+    selectLvl->show();
+}
+
+void MainWindow::newGame(int dificultyLvl)
 {
     clearBoard();
     mistakes_ = 0;
+    ui->labelMistakeCnt->setText(QString::number(mistakes_));
     sudokuBoard_ = sudoku_->generateBoard();
     CellVisibilityGenerator* cellV = new CellVisibilityGenerator();
-    cellVisible_ = cellV->drawCellVisibility(25);
+    cellVisible_ = cellV->drawCellVisibility(dificultyLvl);
     createLayout();
     generateGameBoard();
     delete cellV;
+    startTimer();
 }
 
 void MainWindow::clearBoard()
@@ -139,5 +162,20 @@ void MainWindow::setCellToEdit(Cell* cellToEdit)
     }
     cell_ = cellToEdit;
     cell_->setStyle(true);
+}
+
+void MainWindow::startTimer()
+{
+    timer_ = new QTimer();
+
+    QObject::connect(timer_, &QTimer::timeout, [&]() {
+        int minutes = totalTimeInSeconds_ / 60;
+        int seconds = totalTimeInSeconds_ % 60;
+        QString timeText = QString("%1:%2").arg(minutes, 2, 10, QChar('0')).arg(seconds, 2, 10, QChar('0'));
+        ui->labelTimeCnt->setText(timeText);
+        totalTimeInSeconds_++;
+    });
+
+    timer_->start(1000);
 }
 
