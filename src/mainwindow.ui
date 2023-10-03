@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>379</width>
+    <width>541</width>
     <height>669</height>
    </rect>
   </property>
@@ -22,65 +22,24 @@
      <number>2</number>
     </property>
     <property name="topMargin">
-     <number>2</number>
+     <number>25</number>
     </property>
     <property name="rightMargin">
      <number>2</number>
     </property>
     <property name="bottomMargin">
-     <number>2</number>
+     <number>25</number>
     </property>
     <property name="spacing">
      <number>2</number>
     </property>
-    <item row="3" column="0" colspan="4">
-     <layout class="QGridLayout" name="gameLayout"/>
-    </item>
-    <item row="4" column="0" colspan="4">
-     <spacer name="verticalSpacer">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>504</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="6" column="3">
-     <spacer name="horizontalSpacer_2">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="6" column="0">
-     <spacer name="horizontalSpacer">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
     <item row="1" column="0" colspan="4">
      <layout class="QHBoxLayout" name="settingLayout">
       <item>
        <widget class="QLabel" name="labelTime">
         <property name="font">
          <font>
+          <pointsize>13</pointsize>
           <bold>true</bold>
          </font>
         </property>
@@ -111,6 +70,7 @@
        <widget class="QLabel" name="labelMistake">
         <property name="font">
          <font>
+          <pointsize>13</pointsize>
           <bold>true</bold>
          </font>
         </property>
@@ -142,6 +102,12 @@
       </item>
       <item>
        <widget class="QPushButton" name="pushButtonNew">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>36</height>
+         </size>
+        </property>
         <property name="styleSheet">
          <string notr="true">background-color: rgb(97, 97, 97);
 color: rgb(255, 255, 255);</string>
@@ -153,6 +119,12 @@ color: rgb(255, 255, 255);</string>
       </item>
       <item>
        <widget class="QPushButton" name="pushButtonExit">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>36</height>
+         </size>
+        </property>
         <property name="styleSheet">
          <string notr="true">background-color: rgb(97, 97, 97);
 color: rgb(255, 255, 255);</string>
@@ -164,13 +136,29 @@ color: rgb(255, 255, 255);</string>
       </item>
      </layout>
     </item>
-    <item row="5" column="1" colspan="2">
+    <item row="3" column="0" colspan="4">
+     <layout class="QGridLayout" name="gameLayout"/>
+    </item>
+    <item row="4" column="0" colspan="4">
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>504</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="5" column="0" colspan="4">
      <layout class="QGridLayout" name="buttonLayout">
       <property name="spacing">
        <number>2</number>
       </property>
-      <item row="2" column="0">
-       <widget class="QPushButton" name="pushButton_7">
+      <item row="1" column="1">
+       <widget class="QPushButton" name="pushButton_4">
         <property name="minimumSize">
          <size>
           <width>60</width>
@@ -188,11 +176,24 @@ color: rgb(255, 255, 255);</string>
 color: rgb(255, 255, 255);</string>
         </property>
         <property name="text">
-         <string>7</string>
+         <string>4</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="0">
+      <item row="1" column="0">
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="0" column="1">
        <widget class="QPushButton" name="pushButton_1">
         <property name="minimumSize">
          <size>
@@ -216,29 +217,6 @@ color: rgb(255, 255, 255);</string>
        </widget>
       </item>
       <item row="2" column="2">
-       <widget class="QPushButton" name="pushButton_9">
-        <property name="minimumSize">
-         <size>
-          <width>60</width>
-          <height>60</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>60</width>
-          <height>60</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(97, 97, 97);
-color: rgb(255, 255, 255);</string>
-        </property>
-        <property name="text">
-         <string>9</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
        <widget class="QPushButton" name="pushButton_8">
         <property name="minimumSize">
          <size>
@@ -261,8 +239,8 @@ color: rgb(255, 255, 255);</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="1">
-       <widget class="QPushButton" name="pushButton_5">
+      <item row="2" column="3">
+       <widget class="QPushButton" name="pushButton_9">
         <property name="minimumSize">
          <size>
           <width>60</width>
@@ -280,11 +258,11 @@ color: rgb(255, 255, 255);</string>
 color: rgb(255, 255, 255);</string>
         </property>
         <property name="text">
-         <string>5</string>
+         <string>9</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="1">
+      <item row="0" column="2">
        <widget class="QPushButton" name="pushButton_2">
         <property name="minimumSize">
          <size>
@@ -307,8 +285,11 @@ color: rgb(255, 255, 255);</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="0">
-       <widget class="QPushButton" name="pushButton_4">
+      <item row="0" column="4">
+       <widget class="QPushButton" name="pushButton_Flag">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="minimumSize">
          <size>
           <width>60</width>
@@ -321,40 +302,13 @@ color: rgb(255, 255, 255);</string>
           <height>60</height>
          </size>
         </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(97, 97, 97);
-color: rgb(255, 255, 255);</string>
-        </property>
         <property name="text">
-         <string>4</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="2">
-       <widget class="QPushButton" name="pushButton_3">
-        <property name="minimumSize">
-         <size>
-          <width>60</width>
-          <height>60</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>60</width>
-          <height>60</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(97, 97, 97);
-color: rgb(255, 255, 255);</string>
-        </property>
-        <property name="text">
-         <string>3</string>
+         <string>Flag</string>
         </property>
        </widget>
       </item>
       <item row="1" column="2">
-       <widget class="QPushButton" name="pushButton_6">
+       <widget class="QPushButton" name="pushButton_5">
         <property name="minimumSize">
          <size>
           <width>60</width>
@@ -372,11 +326,11 @@ color: rgb(255, 255, 255);</string>
 color: rgb(255, 255, 255);</string>
         </property>
         <property name="text">
-         <string>6</string>
+         <string>5</string>
         </property>
        </widget>
       </item>
-      <item row="2" column="3">
+      <item row="2" column="4">
        <widget class="QPushButton" name="pushButton_C">
         <property name="minimumSize">
          <size>
@@ -399,11 +353,8 @@ color: rgb(255, 255, 255);</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="3">
-       <widget class="QPushButton" name="pushButton_Flag">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
+      <item row="2" column="1">
+       <widget class="QPushButton" name="pushButton_7">
         <property name="minimumSize">
          <size>
           <width>60</width>
@@ -416,10 +367,73 @@ color: rgb(255, 255, 255);</string>
           <height>60</height>
          </size>
         </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(97, 97, 97);
+color: rgb(255, 255, 255);</string>
+        </property>
         <property name="text">
-         <string>Flag</string>
+         <string>7</string>
         </property>
        </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QPushButton" name="pushButton_3">
+        <property name="minimumSize">
+         <size>
+          <width>60</width>
+          <height>60</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>60</width>
+          <height>60</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(97, 97, 97);
+color: rgb(255, 255, 255);</string>
+        </property>
+        <property name="text">
+         <string>3</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <widget class="QPushButton" name="pushButton_6">
+        <property name="minimumSize">
+         <size>
+          <width>60</width>
+          <height>60</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>60</width>
+          <height>60</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(97, 97, 97);
+color: rgb(255, 255, 255);</string>
+        </property>
+        <property name="text">
+         <string>6</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="5">
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
       </item>
      </layout>
     </item>
