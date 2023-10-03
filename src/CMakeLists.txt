@@ -18,6 +18,7 @@ set(PROJECT_SOURCES
         sudokugenerator.h sudokugenerator.cpp
         cell.h cell.cpp
         cellvisibilitygenerator.h cellvisibilitygenerator.cpp
+		difficultysettings.h difficultysettings.cpp difficultysettings.ui
         boardgame.h boardgame.cpp
 )
 
