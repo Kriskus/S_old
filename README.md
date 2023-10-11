@@ -1,2 +1,2 @@
 # Sudoku
-Sudoku game for PC and Android
+Sudoku game
