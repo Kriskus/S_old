@@ -25,10 +25,7 @@ MainWindow::MainWindow(QWidget *parent)
     setMinimumHeight(669);
     setMinimumHeight(669);
 
-    //ui->labelTimeCnt->setText(QString::number(this->width()) + "|" + QString::number(this->height()));
-    setCellSize();
     setButtons();
-    //chooseLvl();
 }
 
 MainWindow::~MainWindow()
@@ -64,7 +61,7 @@ void MainWindow::setCurrentBoardLayout(int row, int column)
 void MainWindow::setButtons()
 {
     for (int row = 0; row < 3; ++row) {
-        for (int column = 1; column < 4; ++column) {
+        for (int column = 2; column < 5; ++column) {
             QPushButton *button = qobject_cast<QPushButton*>(ui->buttonLayout->itemAtPosition(row, column)->widget());
             if (button) {
                 connect(button, &QPushButton::clicked, [this, button]() {
@@ -78,13 +75,6 @@ void MainWindow::setButtons()
     connect(ui->pushButton_C, &QPushButton::clicked, [this]() {
         cell_->writeDigit("");
     });
-}
-
-void MainWindow::setCellSize()
-{
-    //QRect screenGeometry = QGuiApplication::primaryScreen()->availableGeometry();
-    //cellSideSize_ = screenGeometry.width() * 0.9 / 9;
-    cellSideSize_ = 41;
 }
 
 void MainWindow::generateGameBoard()
@@ -113,7 +103,7 @@ void MainWindow::checkVisibility(int row, int column)
 
 void MainWindow::addCellToGameLayout(int row, int column)
 {
-    Cell* cell = new Cell(sudokuBoard_[row][column], visibility_, cellSideSize_);
+    Cell* cell = new Cell(sudokuBoard_[row][column], visibility_);
     connect(cell, &Cell::clicked, this, &MainWindow::setCellToEdit);
     connect(cell, &Cell::mistake, [this]() {
         ui->labelMistakeCnt->setText(QString::number(++mistakes_));

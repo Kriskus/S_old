@@ -32,7 +32,6 @@ private:
     QVector<std::pair<int, int>> cellVisible_{};
 
     bool visibility_{false};
-    int cellSideSize_{0};
     int mistakes_{0};
     int totalTimeInSeconds_{0};
 
@@ -41,7 +40,6 @@ private slots:
     void setCurrentBoardLayout(int row, int column);
 
     void setButtons();
-    void setCellSize();
 
     void generateGameBoard();
     void checkVisibility(int row, int column);
