@@ -1,16 +1,17 @@
 #include "cell.h"
 
 
-Cell::Cell(int correctDigit, bool visible, int sideSize)
+Cell::Cell(int correctDigit, bool visible, int difficultyLvl)
     : correctDigit_(correctDigit)
+    , difficultyLvl_(difficultyLvl)
 {
-    setFixedSize(sideSize, sideSize);
+    setFixedSize(41, 41);
     setAlignment(Qt::AlignCenter | Qt::AlignHCenter);
     QFont font;
     font.setPointSize(20);
     setFont(font);
     setStyleSheet("QLabel{border: 1px solid grey;"
-                          "color: white;}");
+                  "color: white;}");
     if(visible) {
         setText(QString::number(correctDigit));
         readOnly_ = true;
@@ -29,7 +30,7 @@ void Cell::writeDigit(const QString& digit)
 void Cell::setStyle(bool active)
 {
     QString bColor = active ? "silver" : "none";
-    QString fColor = checkDigit(active);
+    QString fColor = setFontColor(active);
     style_ = "QLabel{"
              "border: 2px solid grey;"
              "color: " + fColor + ";"
@@ -37,15 +38,20 @@ void Cell::setStyle(bool active)
     setStyleSheet(style_);
 }
 
-QString Cell::checkDigit(bool active)
+bool Cell::checkDigit()
 {
-    if(text() != "" && text().toInt() != correctDigit_) {
-        emit mistake();
+    return text().toInt() != correctDigit_;
+}
+
+QString Cell::setFontColor(bool active)
+{
+    if(checkDigit() && difficultyLvl_ < 2) {
         return "red";
-    } else if(active) {
-        return "black";
     } else {
-        return "white";
+        return "black";
+    }
+    if(!active) {
+        return "silver";
     }
 }
 
